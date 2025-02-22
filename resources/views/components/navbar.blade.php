@@ -65,7 +65,13 @@
                 <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                
+                @auth
+                <a href="" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log Out</a>
+                @else
                 <a href="/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Login</a>
+                @endauth
+              
               </div>
             </div>
           </div>
@@ -102,13 +108,19 @@
       
       <div class="border-t border-gray-700 pt-4 pb-3">
         <div class="flex items-center px-5">
+          
+          @auth
           <div class="shrink-0">
             <img class="size-10 rounded-full" src="/../img/user.png" alt="">
           </div>
           <div class="ml-3">
-            <div class="text-base/5 font-medium text-white">DBS Production</div>
-            <div class="text-sm font-medium text-gray-400">username@example.com</div>
-          </div>
+            <div class="text-base/5 font-medium text-white">{{auth()->user()->name}}</div>
+            <div class="text-sm font-medium text-gray-400">{{auth()->user()->email}}</div>
+          </div>          
+          @endauth
+
+
+          
           <button type="button" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">View notifications</span>
@@ -120,7 +132,14 @@
         <div class="mt-3 space-y-1 px-2">
           <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
           <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
+          @auth
+            <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Log Out</button>
+            </form>
+          @else
           <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Login</a>
+          @endauth
         </div>
       </div>
     </div>

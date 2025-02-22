@@ -1,11 +1,13 @@
 <x-layout>
   <x-slot:title>
-    <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4">
-      {{$title}}
+    <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0">
+      <div class="mb-1 sm:mb-0">
+        {{ $title }}
+      </div>
       
-     <x-search />
-
+      <x-search />
     </div>
+    
   </x-slot:title>
 
   {{ $posts->links() }}
