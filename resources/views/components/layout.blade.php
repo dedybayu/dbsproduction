@@ -79,6 +79,6 @@
     </div>
   </footer>
   
-  <x-login></x-login>
+  <x-modal></x-modal>
 </body>
 </html>
