@@ -6,7 +6,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="/../js/script.js"></script>
     <link rel="icon" type="image/png" href="{{ asset('/../img/logo-black.png') }}">
     <title>DBS Production</title>
 </head>
@@ -26,6 +25,8 @@
             {{$slot}}
         </div>
     </main>
+
+    <script src="js/file-upload.js"></script>
 
 </body>
 

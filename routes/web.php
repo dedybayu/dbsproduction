@@ -23,6 +23,7 @@ Route::prefix('posts')->group(function () {
 });
 
 Route::get('/myposts', [PostsController::class, 'myPosts'])->middleware('auth');
+Route::get('/create', [PostsController::class, 'createPost'])->middleware('auth');
 
 
 Route::get('/about', function () {

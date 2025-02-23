@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Auth;
@@ -53,6 +54,11 @@ class PostsController extends Controller
     public function post(Post $post)
     {
         return view('post', ['title' => 'Single Post', 'post' => $post]);
+    }
+
+    public function createPost(Post $post)
+    {
+        return view('admin.create', ['title' => 'Create Post', 'categories' => Category::all()]);
     }
 
 
