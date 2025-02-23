@@ -23,11 +23,11 @@ Install the "flowbite-typography" NPM package to apply styles and format the art
 URL: https://flowbite.com/docs/components/typography/ 
 -->
 
-<main class="pt-4 pb-8 lg:pt-8 lg:pb-8 bg-white dark:bg-gray-900 antialiased">
+<main class="pt-4 pb-8 lg:pt-8 lg:pb-8 rounded-xl bg-white dark:bg-gray-900 antialiased">
   <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
       <article class="mx-auto w-full max-w-5xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
           <header class="mb-4 lg:mb-6 not-format">
-              <a href="/posts" class="font-medium text-sm text-blue-600 hover:underline">&laquo; Back</a>
+              <a href="{{url()->previous()}}" class="font-medium text-sm text-blue-600 hover:underline">&laquo; Back</a>
               <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white mt-6">{{$post['title']}}</h1>
           </header>
 

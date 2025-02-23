@@ -10,14 +10,16 @@
     </x-slot:title>
     {{-- {{ $posts->links() }} --}}
 
-    <form method="post">
+    <form method="post" action="/create">
+        @csrf
+        <input type="hidden" name="author" id="author" value="{{auth()->user()->id}}">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-5">
             <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-4 mb-4">
                 <div class="p-4 items-center justify-center rounded-sm bg-gray-50 dark:bg-gray-800">
                     <div class="sm:col-span-3">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
                         <div class="mt-2">
-                            <input type="text" name="title" id="title" autocomplete="given-name"
+                            <input type="text" name="title" id="title" autocomplete="given-name" required
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 border-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-400 sm:text-sm/6">
                         </div>
                     </div>
@@ -26,7 +28,7 @@
                     <div class="sm:col-span-3">
                         <label for="category" class="block text-sm/6 font-medium text-gray-900">Category</label>
                         <div class="mt-2">
-                            <select name="category" id="category"
+                            <select name="category" id="category" required
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 border-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-400 sm:text-sm/6">
                                 <option value="" disabled selected>Select a category</option>
                                 @foreach($categories as $category)
@@ -41,11 +43,11 @@
 
             <div class="items-center justify-center p-4 mb-4 rounded-sm bg-gray-50 dark:bg-gray-800">
                 <div class="col-span-full">
-                    <label for="article" class="block text-sm/6 font-medium text-gray-900">Article</label>
+                    <label for="body" class="block text-sm/6 font-medium text-gray-900">Article</label>
                     <p class="mt-3 text-sm/6 text-gray-600">Write a article</p>
                     <div class="mt-2">
-                        <textarea name="article" id="article" rows="3"
-                            class="block w-full  min-h-[500px] h-auto rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 border-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-400 sm:text-sm/6"></textarea>
+                        <textarea name="body" id="body" rows="3"
+                            class="block w-full  min-h-[500px] h-auto rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 border-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-400 sm:text-sm/6" required></textarea>
                     </div>
                 </div>
             </div>

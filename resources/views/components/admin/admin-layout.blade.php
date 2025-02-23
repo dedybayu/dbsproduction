@@ -27,7 +27,7 @@
     </main>
 
     <script src="js/file-upload.js"></script>
-
+    <x-modal></x-modal>
 </body>
 
 </html>

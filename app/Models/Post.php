@@ -12,7 +12,9 @@ class Post extends Model
 {
     //
     use HasFactory;
-    protected $fillable = ['title', 'author', 'slug', 'body'];
+    // protected $fillable = ['title', 'author', 'slug', 'body'];
+    protected $guarded = ['id'];
+
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo
@@ -44,5 +46,10 @@ class Post extends Model
             $query->whereHas('author', fn($query) => $query->where('username', $author))
         );
     }
+
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+    
 
 }
