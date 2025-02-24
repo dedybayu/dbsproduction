@@ -115,9 +115,9 @@ class PostsController extends Controller
     }
 
     // Memproses update post (hanya untuk pemilik post)
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::where('slug', $slug)->firstOrFail();
 
         // Cek apakah user saat ini adalah pemilik post
         if (Auth::id() !== $post->author_id) {
@@ -127,15 +127,17 @@ class PostsController extends Controller
         // Validasi input
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'body' => 'required'
         ]);
 
         // Update data
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->save();
+        $post->update([
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'category_id' => $request->input('category')
+        ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+        return redirect('/myposts')->with('success-post', 'Post successfully updated!');
     }
 
 
