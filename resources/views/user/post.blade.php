@@ -1,4 +1,4 @@
-<x-admin.admin-layout>
+<x-user.user-layout>
     <x-slot:title>
         <div
             class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0 mt-4">
@@ -59,4 +59,4 @@
 
 
 
-</x-admin.admin-layout>
+</x-user.user-layout>

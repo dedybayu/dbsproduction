@@ -1,9 +1,9 @@
-<x-admin.admin-layout>
+<x-user.user-layout>
   <x-slot:title>
     <div
       class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0 mt-4">
       <div class="mb-0 sm:mb-0">
-        {{ $title }}
+        {{ $title }} My
       </div>
     </div>
   </x-slot:title>
@@ -15,7 +15,8 @@
         <header class="mb-4 lg:mb-6 not-format">
           <a href="{{url()->previous()}}" class="font-medium text-sm text-blue-600 hover:underline">&laquo; Back</a>
           <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white mt-6">
-            {{$post['title']}}</h1>
+            {{$post['title']}}
+          </h1>
         </header>
 
         <p>{{$post['body']}}</p>
@@ -49,6 +50,16 @@
             </div>
           </address>
         </div>
+
+        <div class="mt-5 flex justify-end">
+          <a href="{{ route('posts.edit', $post->slug) }}"
+            class="focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
+
+          <button type="button" id="deleteButton" data-id="{{$post->id}}" data-modal-target="deleteModal"
+            data-modal-toggle="deleteModal"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete
+            </id=>
+        </div>
       </article>
     </div>
   </main>
@@ -56,4 +67,4 @@
 
 
 
-</x-admin.admin-layout>
+</x-user.user-layout>

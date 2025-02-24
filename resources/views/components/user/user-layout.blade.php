@@ -14,8 +14,8 @@
     {{-- @include('admin.layout.navbar')
     @include('admin.layout.sidebar') --}}
 
-    <x-admin.navbar></x-admin.navbar>
-    <x-admin.sidebar></x-admin.sidebar>
+    <x-user.navbar></x-user.navbar>
+    <x-user.sidebar></x-user.sidebar>
 
 
     <main>
@@ -26,8 +26,10 @@
         </div>
     </main>
 
-    <script src="js/file-upload.js"></script>
+
     <x-modal></x-modal>
+    <script src="/../js/file-upload.js"></script>
+    <script src="/../js/delete-post.js"></script>
 </body>
 
 </html>

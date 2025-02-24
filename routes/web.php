@@ -27,6 +27,7 @@ Route::get('/myposts', [PostsController::class, 'myPosts'])->middleware('auth');
 Route::get('/create', [PostsController::class, 'createPost'])->middleware('auth');
 Route::post('/create', [PostsController::class, 'store']);
 
+Route::delete('/data/{id}', [PostsController::class, 'destroy'])->name('data.destroy');
 
 Route::get('/about', function () {
     return view('about', ['title' => 'About', 'name' => 'Bayu Setiawan']);
@@ -45,3 +46,7 @@ Route::post('/register', [RegisterControler::class, 'store']);
 
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit');
+    Route::put('/posts/{slug}', [PostsController::class, 'update'])->name('posts.update');
+});

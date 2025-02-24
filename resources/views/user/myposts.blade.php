@@ -1,4 +1,4 @@
-<x-admin.admin-layout>
+<x-user.user-layout>
   <x-slot:title>
     <div
       class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0 mt-4">
@@ -12,7 +12,7 @@
   </x-slot:title>
   {{-- {{ $posts->links() }} --}}
 
-  @if (session()->has('success-create-posts'))
+  @if (session()->has('success-post'))
     <div id="alert-3"
     class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
     role="alert">
@@ -23,7 +23,7 @@
     </svg>
     <span class="sr-only">Info</span>
     <div class="ms-3 text-xm font-medium">
-      {{session('success-create-posts')}}
+      {{session('success-post')}}
     </div>
     <button type="button"
       class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -76,7 +76,6 @@
           </span>
         </a>
 
-
         </div>
         <a href="/posts/{{$post['slug']}}"
         class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
@@ -88,6 +87,14 @@
         </svg>
         </a>
       </div>
+
+      <div class="mt-5 flex justify-end">
+        <a href="{{ route('posts.edit', $post->slug) }}"
+          class="focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Edit</a>
+        <button type="button" id="deleteButton" data-id="{{$post->id}}" data-modal-target="deleteModal" data-modal-toggle="deleteModal"
+        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</id=>
+      </div>
+
       </article>
     @empty
       <div>
@@ -101,4 +108,4 @@
 
   {{ $posts->links() }}
 
-</x-admin.admin-layout>
+</x-user.user-layout>
