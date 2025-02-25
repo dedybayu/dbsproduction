@@ -53,7 +53,7 @@
                     <div class="mt-2">
                         <textarea name="body" id="body" rows="3"
                             class="block w-full  min-h-[500px] h-auto rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 border-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-400 sm:text-sm/6"
-                            required>{{$post->body}}
+                            style="white-space: pre-wrap; font-family: monospace;" required>{{$post->body}}
                         </textarea>
                     </div>
                 </div>

@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-// use Storage;
 use Str;
 
 class PostsController extends Controller
@@ -196,7 +194,6 @@ class PostsController extends Controller
         return redirect('/myposts')->with('success-post', 'Post successfully updated!');
     }
 
-
     public function destroy($id)
     {
         $data = Post::find($id);
@@ -210,5 +207,4 @@ class PostsController extends Controller
 
         return redirect('/myposts')->with('success-post', 'Post successfully deleted!');
     }
-
 }

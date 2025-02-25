@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -50,3 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{slug}', [PostsController::class, 'update'])->name('posts.update');
 });
+
+
+
+Route::resource('/categories', AdminCategoryController::class)
+    ->except('show')->middleware('is_admin');

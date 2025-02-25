@@ -34,11 +34,11 @@ URL: https://flowbite.com/docs/components/typography/
           @if ($post->image)
             <div class="flex justify-center items-center">
               <img src="{{asset('storage/' . $post->image)}}" alt=""
-              class="w-full max-h-[350px] object-cover rounded-lg">
+              class="w-full max-h-[350px] object-contain rounded-lg">
             </div>
           @endif
         
-          <p>{{$post['body']}}</p>
+          <p  style="white-space: pre-wrap; font-family: monospace;">{{$post['body']}}</p>
           
           <div class="mb-4 lg:mb-6 not-format mt-10">
             <h3 class="mb-4 text-2xl font-bold leading-tight text-gray-800 lg:mb-6 lg:text-2xl dark:text-white">Author:</h3>
