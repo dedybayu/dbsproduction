@@ -23,6 +23,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
             $table->text('body');
             $table->timestamps();
         });

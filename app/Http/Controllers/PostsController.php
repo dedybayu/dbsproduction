@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+// use Storage;
 use Str;
 
 class PostsController extends Controller
@@ -70,33 +72,55 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->hasFile('file-upload')) {
+            // return response()->json(['error' => 'No file uploaded'], 400);
+            $file = $request->file('file-upload');
+    
+            if (!$file->isValid()) {
+                return response()->json(['error' => 'Invalid file'], 400);
+            }
+        
+            // Nama file unik
+            $filename = time().'_'.$file->getClientOriginalName();
+        
+            // Pastikan folder penyimpanan ada
+            $destinationPath = storage_path('app/public/post-images');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0775, true);
+            }
+        
+            // Pindahkan file
+            $file->move($destinationPath, $filename);
+        
+            $imagePath = "post-images/$filename"; // Simpan path gambar
+        } else {
+            $imagePath = null;
+        }
+    
         // Generate slug awal
         $slug = Str::slug($request->title);
         $originalSlug = $slug; // Simpan slug asli
-
+    
         // Cek apakah slug sudah ada di database
         $count = 1;
         while (Post::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count;
             $count++;
         }
-
-        // Tambahkan slug ke request
-        $request->merge(['slug' => $slug]);
-
-        // dd($request->all()); // Debugging
-        // dd(auth()->id());
+    
+        // Simpan data ke database
         Post::create([
             'title' => $request->title,
             'category_id' => $request->category,
             'author_id' => auth()->id(),
             'body' => $request->body,
-            'slug' => $slug
+            'slug' => $slug,
+            'image' => $imagePath // Menyimpan path gambar dalam database
         ]);
-
+    
         return redirect('/myposts')->with('success-post', 'Successfully created a post!');
-
     }
+    
 
 
     public function edit($slug)
@@ -119,6 +143,35 @@ class PostsController extends Controller
     {
         $post = Post::where('slug', $slug)->firstOrFail();
 
+        if ($request->hasFile('file-upload')) {
+            // return response()->json(['error' => 'No file uploaded'], 400);
+            $file = $request->file('file-upload');
+    
+            if (!$file->isValid()) {
+                return response()->json(['error' => 'Invalid file'], 400);
+            }
+            
+            // Nama file unik
+            $filename = time().'_'.$file->getClientOriginalName();
+        
+            // Hapus Gambar Lama
+            Storage::delete($post->image);
+
+            // Pastikan folder penyimpanan ada
+            $destinationPath = storage_path('app/public/post-images');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0775, true);
+            }
+        
+            // Pindahkan file
+            $file->move($destinationPath, $filename);
+        
+            $imagePath = "post-images/$filename"; // Simpan path gambar
+
+        } else {
+            $imagePath = $post->image;
+        }
+
         // Cek apakah user saat ini adalah pemilik post
         if (Auth::id() !== $post->author_id) {
             abort(403, 'The post is not yours');
@@ -129,12 +182,15 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'body' => 'required'
         ]);
+        $newslug = Str::slug($request->input('title'));
 
         // Update data
         $post->update([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
-            'category_id' => $request->input('category')
+            'category_id' => $request->input('category'),
+            'slug' => $newslug,
+            'image' => $imagePath
         ]);
 
         return redirect('/myposts')->with('success-post', 'Post successfully updated!');
@@ -150,6 +206,7 @@ class PostsController extends Controller
         }
 
         $data->delete();
+        Storage::delete($data->image);
 
         return redirect('/myposts')->with('success-post', 'Post successfully deleted!');
     }

@@ -20,6 +20,13 @@
                         {{$post['title']}}</h1>
                 </header>
 
+                @if ($post->image)
+                    <div class="flex justify-center items-center">
+                    <img src="{{asset('storage/' . $post->image)}}" alt=""
+                    class="w-full max-h-[350px] object-cover rounded-lg">
+                    </div>
+                @endif    
+
                 <p>{{$post['body']}}</p>
 
                 <div class="mb-4 lg:mb-6 not-format mt-10">

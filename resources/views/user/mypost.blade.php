@@ -19,6 +19,13 @@
           </h1>
         </header>
 
+        @if ($post->image)
+          <div class="flex justify-center items-center">
+            <img src="{{asset('storage/' . $post->image)}}" alt=""
+            class="w-full max-h-[350px] object-cover rounded-lg">
+          </div>
+        @endif
+
         <p>{{$post['body']}}</p>
 
         <div class="mb-4 lg:mb-6 not-format mt-10">
@@ -26,8 +33,7 @@
           </h3>
           <address class="flex items-center mb-6 not-italic">
             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-              <img class="mr-4 w-16 h-16 rounded-full"
-                src="/../img/user.png" alt="Jese Leos">
+              <img class="mr-4 w-16 h-16 rounded-full" src="/../img/user.png" alt="Jese Leos">
               <div>
                 <a href="/posts?author={{$post->author->username}}" rel="author"
                   class="text-xl font-bold text-gray-900 dark:text-white">{{$post->author->name}}</a>

@@ -24,6 +24,15 @@ class UserSeder extends Seeder
             'remember_token' => Str::random(10)
 
         ]);
+        User::create([
+            'name' => 'Dedy Bayu Setiawan',
+            'username' => 'aaaaa',
+            'email' => 'bayusetiawan@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10)
+
+        ]);
 
         User::factory(5)->create();
 

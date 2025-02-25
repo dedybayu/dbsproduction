@@ -1,12 +1,16 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     const dropZone = document.getElementById("drop-zone");
     const fileInput = document.getElementById("file-upload");
     const previewImage = document.getElementById("preview-image");
     const uploadIcon = document.getElementById("upload-icon");
 
-    if (!dropZone || !fileInput || !previewImage || !uploadIcon) {
+    if (!fileInput || !previewImage || !uploadIcon) {
         return;
+    }
+
+    // Cek apakah gambar sudah ada (server-side)
+    if (previewImage.src && previewImage.src !== window.location.href) {
+        uploadIcon.classList.add("hidden");
     }
 
     // Klik pada SVG atau area upload membuka file picker
@@ -20,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             reader.onload = function(e) {
                 previewImage.src = e.target.result;
                 previewImage.classList.remove("hidden");
-                uploadIcon.classList.add("hidden");
+                uploadIcon.classList.add("hidden"); // Sembunyikan ikon upload
             };
             reader.readAsDataURL(file);
         }
@@ -32,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         dropZone.classList.add("border-indigo-600");
         dropZone.classList.add("bg-indigo-50");
     });
-    
 
     dropZone.addEventListener("dragleave", () => {
         dropZone.classList.remove("border-indigo-600");
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         dropZone.classList.remove("border-indigo-600");
         if (event.dataTransfer.files.length > 0) {
             fileInput.files = event.dataTransfer.files;
-            fileInput.dispatchEvent(new Event("change")); // Memicu event change
+            fileInput.dispatchEvent(new Event("change"));
         }
     });
 });
