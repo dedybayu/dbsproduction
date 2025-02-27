@@ -55,4 +55,4 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::resource('/categories', AdminCategoryController::class)
-    ->except('show')->middleware('is_admin');
+    ->except('show');
