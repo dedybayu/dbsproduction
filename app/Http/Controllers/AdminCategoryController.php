@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Str;
 class AdminCategoryController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class AdminCategoryController extends Controller
     use AuthorizesRequests;
     public function index()
     {
-        
+
         $this->authorize('is_admin');
         return view('user.admin.category', [
             'title' => 'Category',
@@ -34,8 +36,33 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $validatedData = $request->validate([
+            'category-name' => 'required|string|max:255|unique:categories,name',
+            'category-color' => 'required'
+        ]);
+    
+        // Generate slug dari nama kategori
+        $slug = Str::slug($validatedData['category-name']);
+        $originalSlug = $slug;
+        
+        // Tambahkan angka jika slug sudah ada
+        $count = 1;
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+    
+        // Simpan ke database
+        Category::create([
+            'name' => $validatedData['category-name'],
+            'slug' => $slug,
+            'color' => $validatedData['category-color']
+        ]);
+    
+        return redirect()->back()->with('success-category', 'Category added successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -64,8 +91,20 @@ class AdminCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+    
+        if (!$category) {
+            return redirect()->back()->with('error', 'Category not found.');
+        }
+    
+        // Hapus semua post yang memiliki kategori ini
+        Post::where('category_id', $id)->delete();
+    
+        // Hapus kategori setelah post dihapus
+        $category->delete();
+    
+        return redirect()->back()->with('success-category', 'Category and its posts deleted successfully.');
     }
 }

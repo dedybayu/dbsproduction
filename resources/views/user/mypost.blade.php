@@ -3,7 +3,7 @@
     <div
       class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 mb-4 sm:mb-0 mt-4">
       <div class="mb-0 sm:mb-0">
-        {{ $title }} My
+        {{ $title }}
       </div>
     </div>
   </x-slot:title>
@@ -26,7 +26,7 @@
           </div>
         @endif
 
-        <p  style="white-space: pre-wrap; font-family: monospace;">{{$post['body']}}</p>
+        <p  style="white-space: pre-wrap;">{{$post['body']}}</p>
 
         <div class="mb-4 lg:mb-6 not-format mt-10">
           <h3 class="mb-4 text-2xl font-bold leading-tight text-gray-800 lg:mb-6 lg:text-2xl dark:text-white">Author:

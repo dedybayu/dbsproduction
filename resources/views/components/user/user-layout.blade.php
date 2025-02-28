@@ -30,6 +30,7 @@
     <x-modal></x-modal>
     <script src="/../js/file-upload.js"></script>
     <script src="/../js/delete-post.js"></script>
+    <script src="/../js/delete-category.js"></script>
 </body>
 
 </html>

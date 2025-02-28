@@ -56,3 +56,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('/categories', AdminCategoryController::class)
     ->except('show');
+Route::post('/categories', [AdminCategoryController::class, 'store']);
+Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+
