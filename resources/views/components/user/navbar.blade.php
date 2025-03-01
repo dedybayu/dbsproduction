@@ -26,8 +26,15 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+
+                            @if (auth()->user()->image)
+                                <img class="w-8 h-8 rounded-full"
+                                    src="{{asset('storage/' . $post->image)}}" alt="user photo">
+                            @else
+                                <img class="w-8 h-8 rounded-full"
+                                    src="img/user.png" alt="user photo">
+                            @endif
+
                         </button>
                     </div>
                     <div class="z-40 hidden my-4 text-base list-none bg-indigo-50 divide-y divide-gray-100 rounded-xl shadow-sm dark:bg-gray-700 dark:divide-gray-600"
@@ -47,7 +54,7 @@
                                     role="menuitem">Settings</a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="/profile"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-200 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">My Profile</a>
                             </li>
