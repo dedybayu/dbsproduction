@@ -60,7 +60,8 @@ Route::resource('/categories', AdminCategoryController::class)
     ->except('show');
 Route::post('/categories', [AdminCategoryController::class, 'store']);
 Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
-
+Route::get('/categories/{id}', [AdminCategoryController::class, 'edit']);
+Route::put('/categories/{id}', [AdminCategoryController::class, 'update']);
 
 
 Route::resource('/users', AdminUsersController::class)
