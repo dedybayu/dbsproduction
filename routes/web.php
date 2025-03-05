@@ -67,7 +67,7 @@ Route::put('/categories/{id}', [AdminCategoryController::class, 'update']);
 Route::resource('/users', AdminUsersController::class)
     ->except('show');
 Route::post('/users', [AdminUsersController::class, 'store']);
-Route::delete('/users/{id}', [AdminUsersController::class, 'destroy'])->name('categories.destroy');
+Route::delete('/users/{id}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
 
 
 
