@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterControler;
+use App\Models\Category;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -76,3 +77,7 @@ Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index']);
     Route::get('/edit', [ProfileController::class, 'viewEditUser']);
 })->middleware('auth');
+
+Route::get('/get-categories', function () {
+    return response()->json(Category::all()); // Ambil semua data tanpa pagination
+});

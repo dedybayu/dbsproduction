@@ -13,7 +13,7 @@ class AdminCategoryController extends Controller
      * Display a listing of the resource.
      */
     use AuthorizesRequests;
-    public function index()
+    public function index(Request $request)
     {
 
         $this->authorize('is_admin');
@@ -22,9 +22,15 @@ class AdminCategoryController extends Controller
         //     'categories' => Category::all()
         // ]);
 
-        $categories = Category::paginate(5); // Menampilkan 10 kategori per halaman
+        $categories = Category::paginate(10); // Menampilkan 10 kategori per halaman
         return view('user.admin.category', compact('categories'), ['title' => 'Category']);
+    //     $categories = Category::paginate(5); // Sesuaikan jumlah per halaman
 
+    //     if ($request->ajax()) {
+    //         return view('user.admin.category.partials.category_table', compact('categories'))->render();
+    //     }
+    
+    //     return view('user.admin.category.category', compact('categories'));
     }
 
     /**
