@@ -29,7 +29,7 @@
 
                             @if (auth()->user()->image)
                                 <img class="w-8 h-8 rounded-full"
-                                    src="{{asset('storage/' . $post->image)}}" alt="user photo">
+                                    src="{{asset('storage/' . auth()->user()->image)}}" alt="user photo">
                             @else
                                 <img class="w-8 h-8 rounded-full"
                                     src="img/user.png" alt="user photo">

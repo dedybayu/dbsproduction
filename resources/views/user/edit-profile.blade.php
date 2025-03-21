@@ -9,12 +9,14 @@
 
     </x-slot:title>
 
-    <form action="/profile/update" method="POST" enctype="multipart/form-data" class="p-2 md:p-4 flex justify-center items-center">
+    <form action="{{ route('profile.update', auth()->user()->id ) }}" method="POST" enctype="multipart/form-data" class="p-2 md:p-4 flex justify-center items-center">
+        @method('PUT')
+        @csrf
         <div class="w-full px-6 pb-8 sm:max-w-xl sm:rounded-lg">
             <div class="grid max-w-2xl mx-auto mt-8">
                 <div class="flex flex-col justify-center items-center space-y-5 sm:flex-row sm:space-y-0">
                     <img id="profileImage" class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                        src="{{ auth()->user()->image ?? '/../img/user.png' }}"
+                        src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('img/user.png') }}"
                         alt="Profile picture">
                     
                     <div class="flex flex-col space-y-5 sm:ml-8">

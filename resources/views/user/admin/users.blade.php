@@ -95,7 +95,7 @@
                             <th scope="row"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                 @if (auth()->user()->image)
-                                    <img class="w-10 h-10 rounded-full" src="{{asset('storage/' . $post->image)}}"
+                                    <img class="w-10 h-10 rounded-full" src="{{asset('storage/' . $user->image)}}"
                                         alt="Jese image">
                                 @else
                                     <img class="w-10 h-10 rounded-full" src="img/user.png" alt="Jese image">

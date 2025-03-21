@@ -15,7 +15,7 @@
                 <div class="flex flex-col justify-center items-center space-y-5 sm:flex-row sm:space-y-0">
                     @if (auth()->user()->image)
                         <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                            src="{{asset('storage/' . $post->image)}}" alt="Bordered avatar">
+                            src="{{asset('storage/' . auth()->user()->image)}}" alt="Bordered avatar">
                     @else
                         <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
                             src="img/user.png" alt="Bordered avatar">
@@ -30,7 +30,7 @@
                             class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your name</label>
                         <input type="text" id="first_name"
                             class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                            placeholder="Your first name" value="{{auth()->user()->name}}" required>
+                            placeholder="Your first name" value="{{auth()->user()->name}}" disabled>
                     </div>
 
                     <div class="mb-2 sm:mb-6">
@@ -38,7 +38,7 @@
                             email</label>
                         <input type="email" id="email"
                             class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                            placeholder="your.email@mail.com" required value="{{auth()->user()->email}}">
+                            placeholder="your.email@mail.com" required value="{{auth()->user()->email}}" disabled>
                     </div>
 
                     <div class="mb-6">
@@ -46,7 +46,7 @@
                             class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Bio</label>
                         <textarea id="message" rows="4"
                             class="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 "
-                            placeholder="Write your bio here..."></textarea>
+                            placeholder="Write your bio here..." disabled>{{auth()->user()->bio}}</textarea>
                     </div>
 
                     <div class="flex justify-end">

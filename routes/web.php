@@ -52,6 +52,7 @@ Route::post('/register', [RegisterControler::class, 'store']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{slug}', [PostsController::class, 'update'])->name('posts.update');
+    Route::put('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
