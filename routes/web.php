@@ -81,3 +81,7 @@ Route::prefix('profile')->group(function () {
 Route::get('/get-categories', function () {
     return response()->json(Category::all()); // Ambil semua data tanpa pagination
 });
+
+
+Route::get('/users/{id}/edit', [AdminUsersController::class, 'edit'])->name('user.edit');
+Route::put('/users/update/{id}', [AdminUsersController::class, 'update'])->name('user.update');

@@ -10,6 +10,8 @@
     <script src="/../js/script.js"></script>
     <link rel="icon" type="image/png" href="{{ asset('/../img/logo-black.png') }}">
     <title>DBS Production</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body class="h-full">
     <!--

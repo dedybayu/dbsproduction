@@ -48,8 +48,15 @@
                             class="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 "
                             placeholder="Write your bio here..." disabled>{{auth()->user()->bio}}</textarea>
                     </div>
+                    <div class="mb-6 flex justify-center">
+                        <a href="/profile/edit"
+                            class="text-white bg-yellow-700  hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Change Password</a>
+                    </div>
 
-                    <div class="flex justify-end">
+
+                    <div class="flex justify-between">
+                        <a href="{{url()->previous()}}"
+                            class="text-white bg-gray-500   hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Back</a>
                         <a href="/profile/edit"
                             class="text-white bg-green-700  hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Edit</a>
                     </div>

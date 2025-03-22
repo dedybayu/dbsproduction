@@ -49,17 +49,21 @@ class AdminUsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        return User::where('id', $id)->first();
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+         dd($request->file('profile_picture'));
+        
+
+
     }
 
     /**
