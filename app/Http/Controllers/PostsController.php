@@ -202,8 +202,12 @@ class PostsController extends Controller
             return redirect()->back()->with('error', 'Post not found!');
         }
 
+        // Hapus gambar
+        if ($data->image) {
+            Storage::delete($data->image);
+        }
+
         $data->delete();
-        Storage::delete($data->image);
 
         return redirect('/myposts')->with('success-post', 'Post successfully deleted!');
     }

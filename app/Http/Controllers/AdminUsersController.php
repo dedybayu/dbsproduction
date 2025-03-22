@@ -118,7 +118,7 @@ class AdminUsersController extends Controller
          if ($request->password) {
             $user->password = $request->password;
          }
-         
+
          if ($request->input('remove_picture') == "1") {
              // Hapus gambar lama jika ada
              if ($user->image) {
@@ -132,7 +132,7 @@ class AdminUsersController extends Controller
          $user->save();
  
          // return "NULL" . $imagePath;
-         return redirect('/users')->with('success', 'User updated successfully!');
+         return redirect('/users')->with('success-user', 'User updated successfully!');
 
     }
 
@@ -155,6 +155,6 @@ class AdminUsersController extends Controller
         // // Hapus kategori setelah post dihapus
         // $user->delete();
 
-        // return redirect()->back()->with('success-category', 'Category and its posts deleted successfully.');
+        // return redirect()->back()->with('success-user', 'Category and its posts deleted successfully.');
     }
 }

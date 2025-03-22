@@ -16,7 +16,7 @@
 
 
 
-    @if (session()->has('success-category'))
+    @if (session()->has('success-user'))
         <div id="alert-3"
             class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 max-w-md mx-auto"
             role="alert">
@@ -27,7 +27,7 @@
             </svg>
             <span class="sr-only">Info</span>
             <div class="ms-3 text-xm font-medium">
-                {{session('success-category')}}
+                {{session('success-user')}}
             </div>
             <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
@@ -212,6 +212,8 @@
                     <form class="space-y-4" action="" method="POST" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Name</label>
@@ -240,6 +242,7 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="occupancy" required />
                         </div>
+                    </div>
                         <div>
                             <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Bio</label>
@@ -279,7 +282,9 @@
 
                         </div>
                         <br>
-                        <div class="flex justify-end"> 
+                        <div class="flex justify-between">
+                            <button data-modal-hide="edit-user-modal" type="button" 
+                                class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Cancel</button> 
                             <button type="submit"
                                 class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </div>
