@@ -53,7 +53,10 @@ Route::post('/register', [RegisterControler::class, 'store']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{slug}', [PostsController::class, 'update'])->name('posts.update');
-    Route::put('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
+    
+    Route::get('/csrf-token', function () {
+        return response()->json(['csrf_token' => csrf_token()]);
+    });
 });
 
 
@@ -76,6 +79,9 @@ Route::delete('/users/{id}', [AdminUsersController::class, 'destroy'])->name('us
 Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index']);
     Route::get('/edit', [ProfileController::class, 'viewEditUser']);
+    Route::put('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/{id}/update_password', [ProfileController::class, 'update_password'])->name('profile.update_password');
+    Route::put('/profile/{id}/update_password', [ProfileController::class, 'update_password'])->name('profile.update_password');
 })->middleware('auth');
 
 Route::get('/get-categories', function () {
@@ -85,3 +91,4 @@ Route::get('/get-categories', function () {
 
 Route::get('/users/{id}/edit', [AdminUsersController::class, 'edit'])->name('user.edit');
 Route::put('/users/update/{id}', [AdminUsersController::class, 'update'])->name('user.update');
+
