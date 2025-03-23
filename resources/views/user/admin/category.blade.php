@@ -76,9 +76,9 @@
                         <td class="px-6 py-4">{{ $category->name }}</td>
                         <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
                             <button data-id="{{ $category->id }}" data-color="{{ $category->color }}"
-                                data-name="{{ $category->name }}" ata-modal-target="editCategoryModal"
+                                data-name="{{ $category->name }}" data-modal-target="editCategoryModal"
                                 data-modal-toggle="editCategoryModal" id=""
-                                class="edit-category-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                class="block edit-category-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 Edit
                             </button>
 
@@ -184,6 +184,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Edit Category modal -->
