@@ -87,7 +87,8 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        return response()->json(Category::findOrFail($id));
+        // dd($id);
+        return Category::where('id', $id)->first();
     }
 
     /**
@@ -95,16 +96,16 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($id);
         $request->validate([
-            'name' => 'required|string|max:255',
+            'category_name' => 'required|string|max:255',
+            'category_color' => 'required',
         ]);
 
         $category = Category::findOrFail($id);
-        $category->update(['name' => $request->name]);
+        $category->update(['name' => $request->category_name, 'color' => $request->category_color]);
 
         return redirect()->back()->with('success-category', 'Category updated successfully');
-
-        // return response()->json(['message' => 'Category updated successfully']);
     }
 
     /**

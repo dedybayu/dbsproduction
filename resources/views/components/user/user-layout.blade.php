@@ -45,7 +45,7 @@
     <script src="/../js/delete-post.js"></script>
     <script src="/../js/delete-category.js"></script>
     <script src="/../js/delete-user.js"></script>
-    <script src="/../js/edit-category.js"></script>
+    {{-- <script src="/../js/edit-category.js"></script> --}}
 </body>
 
 </html>

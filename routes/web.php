@@ -65,8 +65,8 @@ Route::resource('/categories', AdminCategoryController::class)
     ->except('show');
 Route::post('/categories', [AdminCategoryController::class, 'store']);
 Route::delete('/categories/{id}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
-Route::get('/categories/{id}', [AdminCategoryController::class, 'edit']);
-Route::put('/categories/{id}', [AdminCategoryController::class, 'update']);
+// Route::get('/categories/{id}', [AdminCategoryController::class, 'edit']);
+// Route::put('/categories/{id}', [AdminCategoryController::class, 'update']);
 
 
 Route::resource('/users', AdminUsersController::class)
@@ -91,4 +91,7 @@ Route::get('/get-categories', function () {
 
 Route::get('/users/{id}/edit', [AdminUsersController::class, 'edit'])->name('user.edit');
 Route::put('/users/update/{id}', [AdminUsersController::class, 'update'])->name('user.update');
+
+Route::get('/categories/{id}/edit', [AdminCategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('categories.update');
 
