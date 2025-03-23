@@ -14,8 +14,8 @@
                 <form class="space-y-4 md:space-y-6" action="" method="post">
                     @csrf
                     <div>
-                        <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            Name</label>
                         <input name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-gray-400"
                             placeholder="name" required value="{{old('name')}}">
@@ -72,7 +72,8 @@
                         <div class="ml-3 text-sm">
                             <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a
                                     class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                    data-modal-target="terms-and-conditions-modal" data-modal-toggle="terms-and-conditions-modal">Terms and Conditions</a></label>
+                                    data-modal-target="terms-and-conditions-modal"
+                                    data-modal-toggle="terms-and-conditions-modal">Terms and Conditions</a></label>
                         </div>
                     </div>
                     <button type="submit"
@@ -86,4 +87,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const password = document.getElementById("password");
+            const confirmPassword = document.getElementById("confirm-password");
+            const passNotMatch = document.getElementById("passNotMatch");
+
+            form.addEventListener("submit", function (event) {
+                if (password.value !== confirmPassword.value) {
+                    event.preventDefault(); // Mencegah form dikirim
+                    passNotMatch.textContent = "Confirm password does not match";
+                    confirmPassword.focus();
+                } else {
+                    passNotMatch.textContent = "";
+                }
+            });
+
+            const deleteButton = document.getElementById("deleteButton");
+            const deleteForm = document.getElementById("deleteForm");
+
+            deleteButton.addEventListener("click", function () {
+                let id = this.getAttribute("data-id");
+                deleteForm.setAttribute("action", `/data/${id}`);
+            });
+        });
+
+    </script>
 </x-layout>
