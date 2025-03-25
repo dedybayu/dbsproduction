@@ -73,6 +73,8 @@ Route::resource('/users', AdminUsersController::class)
     ->except('show');
 Route::post('/users', [AdminUsersController::class, 'store']);
 Route::delete('/users/{id}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
+Route::get('/api/users', [AdminUsersController::class, 'getUsers']);
+
 
 
 

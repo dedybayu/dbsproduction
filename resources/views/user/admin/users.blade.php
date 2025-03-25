@@ -12,7 +12,20 @@
     </x-slot:title>
     {{-- {{ $posts->links() }} --}}
 
+    <div id="popup-success"
+        class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert">
+        <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div class="ms-3 text-xm font-medium">
+            Password successfully changed
+        </div>
 
+    </div>
 
 
 
@@ -85,52 +98,52 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th class="px-6 py-4">
-                                {{$loop->iteration}}
-                            </th>
-                            <th scope="row"
-                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                @if (auth()->user()->image)
-                                    <img class="w-10 h-10 rounded-full" src="{{asset('storage/' . $user->image)}}"
-                                        alt="User image">
-                                @else
-                                    <img class="w-10 h-10 rounded-full" src="img/user.png" alt="User image">
-                                @endif
+                <tbody id="user-table-body">
+                    {{-- @foreach ($users as $user)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th class="px-6 py-4">
+                            {{$loop->iteration}}
+                        </th>
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                            @if (auth()->user()->image)
+                            <img class="w-10 h-10 rounded-full" src="{{asset('storage/' . $user->image)}}"
+                                alt="User image">
+                            @else
+                            <img class="w-10 h-10 rounded-full" src="img/user.png" alt="User image">
+                            @endif
 
-                                <div class="ps-3">
-                                    <div class="text-base font-semibold">
-                                        {{ $user->name }} {{ $user->id === auth()->id() ? '(You)' : '' }}
-                                    </div>
-                                    <div class="font-normal text-gray-500">{{ $user->email }}</div>
+                            <div class="ps-3">
+                                <div class="text-base font-semibold">
+                                    {{ $user->name }} {{ $user->id === auth()->id() ? '(You)' : '' }}
                                 </div>
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ Str::words($user->occupancy, 2, '...') }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ Str::words($user->bio, 3, '...') }}
-                            </td>
-                            <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
-                                @if ($user->id !== auth()->id())
-                                    <button data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal"
-                                        class="edit-user-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                        Edit
-                                    </button>
+                                <div class="font-normal text-gray-500">{{ $user->email }}</div>
+                            </div>
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ Str::words($user->occupancy, 2, '...') }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ Str::words($user->bio, 3, '...') }}
+                        </td>
+                        <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
+                            @if ($user->id !== auth()->id())
+                            <button data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal"
+                                class="edit-user-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Edit
+                            </button>
 
-                                    <button data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal"
-                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700 delete-user-btn"
-                                        data-user-id="{{$user->id}}">
-                                        Delete
-                                    </button>
-                                @endif
+                            <button data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal"
+                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700 delete-user-btn"
+                                data-user-id="{{$user->id}}">
+                                Delete
+                            </button>
+                            @endif
 
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
+                    @endforeach --}}
 
 
 
@@ -209,40 +222,44 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5">
-                    <form class="space-y-4" action="" method="POST" enctype="multipart/form-data">
+                    <form class="space-y-4" id="editUserForm" action="" method="POST" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
 
-                        <div>
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Name</label>
-                            <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Name" required />
+                            <div>
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Name</label>
+                                <input type="text" name="name" id="name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Name" required />
+                            </div>
+                            <div>
+                                <label for="username"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Username</label>
+                                <input type="username" name="username" id="username"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="username" required />
+                                <p id="error-username" class="mt-2 text-sm text-red-600"></p>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Email</label>
+                                <input type="email" name="email" id="email"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="name@company.com" required />
+                                <p id="error-email" class="mt-2 text-sm text-red-600"></p>
+                            </div>
+                            <div>
+                                <label for="occupancy"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Occupancy</label>
+                                <input type="text" name="occupancy" id="occupancy"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="occupancy" required />
+                            </div>
                         </div>
-                        <div>
-                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Username</label>
-                            <input type="username" name="username" id="username"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="username" required />
-                        </div>
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Email</label>
-                            <input type="email" name="email" id="email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="name@company.com" required />
-                        </div>
-                        <div>
-                            <label for="occupancy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                Occupancy</label>
-                            <input type="text" name="occupancy" id="occupancy"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="occupancy" required />
-                        </div>
-                    </div>
                         <div>
                             <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Bio</label>
@@ -281,10 +298,15 @@
                             </div>
 
                         </div>
+                        <p id="response-success" class="mt-2 text-sm"></p>
+                        <p id="response-message" class="mt-2 text-sm"></p>
+                        <p id="error-message" class="mt-2 text-sm"></p>
+
+
                         <br>
                         <div class="flex justify-between">
-                            <button data-modal-hide="edit-user-modal" type="button" 
-                                class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Cancel</button> 
+                            <button data-modal-hide="edit-user-modal" type="button"
+                                class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Cancel</button>
                             <button type="submit"
                                 class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </div>
@@ -301,54 +323,295 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const editButtons = document.querySelectorAll(".edit-user-btn");
+            const modal = document.querySelector("#edit-user-modal");
+            const form = modal.querySelector("form");
+            const errorMessage = document.getElementById("error-message");
+            const responseMessage = document.getElementById("response-message");
+            const responseSuccess = document.getElementById("response-success");
+            const popupSuccess = document.getElementById("popup-success");
+            const tableBody = document.getElementById("user-table-body");
+            
+            
+            popupSuccess.classList.add("hidden");
 
-            editButtons.forEach(button => {
+            // Panggil saat pertama kali halaman dimuat
+            reloadUserTable();
+
+
+            function reloadUserTable() {
+                // const tableBody = document.getElementById("user-table-body");
+
+                fetch("/api/users") // Ambil data user dari endpoint API
+                    .then(response => response.json())
+                    .then(users => {
+                        tableBody.innerHTML = ""; // Kosongkan terlebih dahulu
+
+                        users.forEach((user, index) => {
+                            const isCurrentUser = user.id === {{ auth()->id() }}; // Cek apakah ini user yang login
+
+                            let userRow = `
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th class="px-6 py-4">${index + 1}</th>
+                    <td class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        <img class="w-10 h-10 rounded-full" src="${user.image ? '/storage/' + user.image : 'img/user.png'}" alt="User image">
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">
+                                ${user.name} ${isCurrentUser ? '(You)' : ''}
+                            </div>
+                            <div class="font-normal text-gray-500">${user.email}</div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">${user.occupancy ? user.occupancy : '-'}</td>
+                    <td class="px-6 py-4">${user.bio ? user.bio : '-'}</td>
+                    <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
+                        ${!isCurrentUser ? `
+                            <button class="edit-user-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-user-id="${user.id}">
+                                Edit
+                            </button>
+                            <button class="delete-user-btn text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700" data-user-id="${user.id}">
+                                Delete
+                            </button>
+                        ` : ''}
+                    </td>
+                </tr>
+                `;
+
+                            tableBody.innerHTML += userRow;
+                        });
+
+                        // Tambahkan event listener ke tombol edit dan delete setelah tabel diperbarui
+                        attachEventListeners();
+                    })
+                    .catch(error => console.error("Error loading users:", error));
+            }
+
+
+
+
+            // Fungsi untuk menambahkan event listener ke tombol edit dan delete
+            function attachEventListeners() {
+                document.querySelectorAll(".edit-user-btn").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const userId = this.getAttribute("data-user-id");
+                        openEditModal(userId);
+                    });
+                });
+
+                document.querySelectorAll(".delete-user-btn").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const userId = this.getAttribute("data-user-id");
+                        openDeleteModal(userId);
+                    });
+                });
+            }
+
+            // Fungsi untuk membuka modal edit (kamu bisa sesuaikan sesuai kebutuhan)
+            // Fungsi untuk membuka modal edit
+            async function openEditModal(userId) {
+                console.log("Edit user:", userId);
+
+                const editModal = document.getElementById("edit-user-modal");
+                const editUserForm = document.getElementById("editUserForm");
+
+                // Set action form sesuai ID user
+                editUserForm.action = `/users/update/${userId}`;
+
+                // Tampilkan modal edit dengan backdrop
+                editModal.classList.remove("hidden");
+                editModal.classList.add("flex");
+                editModal.classList.add("bg-gray-800");
+                editModal.classList.add("bg-opacity-50");
+                // Kosongkan pesan error
+                document.getElementById("error-username").innerHTML = "";
+                document.getElementById("error-email").innerHTML = "";
+                responseSuccess.classList.add("hidden");
+
+
+                try {
+                    // Fetch data user dari server
+                    const response = await fetch(`/users/${userId}/edit`);
+                    if (!response.ok) {
+                        throw new Error("Gagal mengambil data pengguna.");
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    // Isi form dengan data user
+                    editUserForm.querySelector("input[name='name']").value = data.name || "";
+                    editUserForm.querySelector("input[name='username']").value = data.username || "";
+                    editUserForm.querySelector("input[name='email']").value = data.email || "";
+                    editUserForm.querySelector("input[name='occupancy']").value = data.occupancy || "";
+                    editUserForm.querySelector("input[name='bio']").value = data.bio || "";
+
+                    // Atur gambar profil jika ada
+                    document.getElementById("profileImage").src = data.image
+                        ? `/storage/${data.image}`
+                        : "{{ asset('img/user.png') }}";
+
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                    document.getElementById("error-message").innerHTML = "Gagal memuat data pengguna.";
+                }
+            }
+
+            // Event listener untuk tombol close modal
+            document.querySelectorAll("[data-modal-hide='edit-user-modal']").forEach((button) => {
                 button.addEventListener("click", function () {
+                    document.getElementById("edit-user-modal").classList.add("hidden");
+                });
+            });
+            // Fungsi untuk membuka modal delete (kamu bisa sesuaikan sesuai kebutuhan)
+            function openDeleteModal(userId) {
+                const deleteModal = document.getElementById("delete-user-modal");
+                const deleteUserForm = document.getElementById("deleteUserForm");
+
+                console.log("Delete user:", userId);
+
+                // Set action form sesuai ID user
+                deleteUserForm.action = `/users/${userId}`;
+
+                // Tampilkan modal delete
+                deleteModal.classList.remove("hidden");
+                deleteModal.classList.add("flex");
+                deleteModal.classList.add("bg-gray-800");
+                deleteModal.classList.add("bg-opacity-50");
+
+
+                // Event listener untuk tombol close modal
+                document.querySelectorAll("[data-modal-hide='delete-user-modal']").forEach((button) => {
+                    button.addEventListener("click", function () {
+                        deleteModal.classList.add("hidden");
+                    });
+                });
+            }
+
+
+            // Menampilkan modal edit user
+            editButtons.forEach(button => {
+                button.addEventListener("click", async function () {
+                    document.getElementById("error-username").innerHTML = "";
+                    document.getElementById("error-email").innerHTML = "";
+
                     const userId = this.closest("tr").querySelector(".delete-user-btn").getAttribute("data-user-id");
 
-                    fetch(`/users/${userId}/edit`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.querySelector("#edit-user-modal form").action = `/users/update/${userId}`;
+                    try {
+                        const response = await fetch(`/users/${userId}/edit`);
+                        const data = await response.json();
 
-                            document.querySelector("#edit-user-modal input[name='name']").value = data.name;
-                            document.querySelector("#edit-user-modal input[name='username']").value = data.username;
-                            document.querySelector("#edit-user-modal input[name='email']").value = data.email;
-                            document.querySelector("#edit-user-modal input[name='occupancy']").value = data.occupancy;
-                            document.querySelector("#edit-user-modal input[name='bio']").value = data.bio;
+                        form.action = `/users/update/${userId}`;
+                        form.querySelector("input[name='name']").value = data.name;
+                        form.querySelector("input[name='username']").value = data.username;
+                        form.querySelector("input[name='email']").value = data.email;
+                        form.querySelector("input[name='occupancy']").value = data.occupancy;
+                        form.querySelector("input[name='bio']").value = data.bio;
 
-                            if (data.image) {
-                                document.getElementById('profileImage').src = `/storage/${data.image}`;
-                            } else {
-                                document.getElementById('profileImage').src = "{{ asset('img/user.png') }}";
-                            }
+                        document.getElementById('profileImage').src = data.image ? `/storage/${data.image}` : "{{ asset('img/user.png') }}";
 
-                            document.querySelector("#edit-user-modal").classList.remove("hidden");
-                        })
-                        .catch(error => console.error("Error fetching user data:", error));
+                        modal.classList.remove("hidden");
+                        errorMessage.innerHTML = ""; // Hapus pesan error sebelumnya
+                    } catch (error) {
+                        console.error("Error fetching user data:", error);
+                    }
                 });
             });
 
+            // Menutup modal
             document.querySelector("[data-modal-hide='edit-user-modal']").addEventListener("click", function () {
-                document.querySelector("#edit-user-modal").classList.add("hidden");
+                modal.classList.add("hidden");
             });
+
+
+            // Menangani submit form edit user
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                let formData = new FormData(form);
+                let submitButton = form.querySelector("button[type='submit']");
+                submitButton.disabled = true; // Mencegah multiple submit
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": document.querySelector("input[name=_token]").value
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw errorData;
+                    }
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        responseSuccess.textContent = data.success;
+                        responseSuccess.classList.remove("hidden");
+                        responseSuccess.classList.add("text-green-500");
+
+                        toggleSuccessMessage(); // Menampilkan notifikasi sukses
+                        reloadUserTable();
+
+                        document.querySelector("[data-modal-hide='edit-user-modal']")?.click(); // Tutup modal
+
+                    } else {
+                        responseMessage.textContent = data.message || "Error updating user.";
+                        responseMessage.classList.remove("hidden");
+                        responseMessage.classList.add("text-red-500");
+                    }
+                } catch (error) {
+                    if (error.error_username) {
+                        document.getElementById("error-username").innerHTML = error.error_username;
+                    }
+
+                    if (error.error_email) {
+                        document.getElementById("error-email").innerHTML = error.error_email;
+                    }
+
+                    console.error("Unexpected error:", error);
+                } finally {
+                    submitButton.disabled = false; // Aktifkan kembali tombol submit
+                }
+            });
+
         });
 
+        // Fungsi menampilkan pesan sukses dengan efek fade-out
+        function toggleSuccessMessage() {
+            const popupSuccess = document.getElementById("popup-success");
+            popupSuccess.classList.remove("hidden");
+            popupSuccess.style.opacity = "1";
+
+            setTimeout(() => {
+                popupSuccess.style.transition = "opacity 1s ease-out";
+                popupSuccess.style.opacity = "0";
+
+                setTimeout(() => {
+                    popupSuccess.classList.add("hidden");
+                }, 700);
+            }, 4000);
+        }
+
+        // Menampilkan preview gambar sebelum upload
         function previewImage(event) {
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function () {
                 document.getElementById('profileImage').src = reader.result;
-            }
+            };
             reader.readAsDataURL(event.target.files[0]);
 
             document.getElementById('remove_picture').value = "0";
         }
 
+        // Menghapus gambar yang dipilih
         function removeImage() {
             document.getElementById('profileImage').src = "{{ asset('img/user.png') }}";
             document.getElementById('profile_picture').value = '';
             document.getElementById('remove_picture').value = "1";
         }
     </script>
+
+
 
 </x-user.user-layout>
