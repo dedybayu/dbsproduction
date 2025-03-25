@@ -202,7 +202,8 @@
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-lg max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+            <div id="edit-user-content"
+                class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700 opacity-0 scale-95 transition-all duration-300">
                 <!-- Modal header -->
                 <div
                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
@@ -210,8 +211,7 @@
                         Edit User
                     </h3>
                     <button type="button"
-                        class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="edit-user-modal">
+                        class="btn-close-edit end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -305,8 +305,8 @@
 
                         <br>
                         <div class="flex justify-between">
-                            <button data-modal-hide="edit-user-modal" type="button"
-                                class="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Cancel</button>
+                            <button type="button"
+                                class="btn-close-edit text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Cancel</button>
                             <button type="submit"
                                 class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </div>
@@ -330,8 +330,8 @@
             const responseSuccess = document.getElementById("response-success");
             const popupSuccess = document.getElementById("popup-success");
             const tableBody = document.getElementById("user-table-body");
-            
-            
+
+
             popupSuccess.classList.add("hidden");
 
             // Panggil saat pertama kali halaman dimuat
@@ -350,31 +350,31 @@
                             const isCurrentUser = user.id === {{ auth()->id() }}; // Cek apakah ini user yang login
 
                             let userRow = `
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th class="px-6 py-4">${index + 1}</th>
-                    <td class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full" src="${user.image ? '/storage/' + user.image : 'img/user.png'}" alt="User image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">
-                                ${user.name} ${isCurrentUser ? '(You)' : ''}
-                            </div>
-                            <div class="font-normal text-gray-500">${user.email}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">${user.occupancy ? user.occupancy : '-'}</td>
-                    <td class="px-6 py-4">${user.bio ? user.bio : '-'}</td>
-                    <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
-                        ${!isCurrentUser ? `
-                            <button class="edit-user-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-user-id="${user.id}">
-                                Edit
-                            </button>
-                            <button class="delete-user-btn text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700" data-user-id="${user.id}">
-                                Delete
-                            </button>
-                        ` : ''}
-                    </td>
-                </tr>
-                `;
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th class="px-6 py-4">${index + 1}</th>
+                                            <td class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                                <img class="w-10 h-10 rounded-full" src="${user.image ? '/storage/' + user.image : 'img/user.png'}" alt="User image">
+                                                <div class="ps-3">
+                                                    <div class="text-base font-semibold">
+                                                        ${user.name} ${isCurrentUser ? '(You)' : ''}
+                                                    </div>
+                                                    <div class="font-normal text-gray-500">${user.email}</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4">${user.occupancy ? user.occupancy : '-'}</td>
+                                            <td class="px-6 py-4">${user.bio ? user.bio : '-'}</td>
+                                            <td class="px-6 py-4 text-center flex items-center justify-center gap-2">
+                                                ${!isCurrentUser ? `
+                                                    <button class="edit-user-btn focus:outline-none no-underline text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-user-id="${user.id}">
+                                                        Edit
+                                                    </button>
+                                                    <button class="delete-user-btn text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700" data-user-id="${user.id}">
+                                                        Delete
+                                                    </button>
+                                                ` : ''}
+                                            </td>
+                                        </tr>
+                                        `;
 
                             tableBody.innerHTML += userRow;
                         });
@@ -407,20 +407,27 @@
 
             // Fungsi untuk membuka modal edit (kamu bisa sesuaikan sesuai kebutuhan)
             // Fungsi untuk membuka modal edit
+            const editModal = document.getElementById("edit-user-modal");
+            const modalContent = document.getElementById("edit-user-content");
+            const editUserForm = document.getElementById("editUserForm");
             async function openEditModal(userId) {
                 console.log("Edit user:", userId);
 
-                const editModal = document.getElementById("edit-user-modal");
-                const editUserForm = document.getElementById("editUserForm");
+
 
                 // Set action form sesuai ID user
                 editUserForm.action = `/users/update/${userId}`;
 
                 // Tampilkan modal edit dengan backdrop
                 editModal.classList.remove("hidden");
-                editModal.classList.add("flex");
-                editModal.classList.add("bg-gray-800");
-                editModal.classList.add("bg-opacity-50");
+                editModal.classList.add("flex", "h-screen", "bg-opacity-50", "bg-gray-800");
+
+                setTimeout(() => {
+                    modalContent.classList.remove("opacity-0", "scale-95");
+                    modalContent.classList.add("opacity-100", "scale-100");
+                }, 10); // Delay sedikit agar transisi bisa berjalan
+
+
                 // Kosongkan pesan error
                 document.getElementById("error-username").innerHTML = "";
                 document.getElementById("error-email").innerHTML = "";
@@ -451,14 +458,28 @@
                     console.error("Error fetching user data:", error);
                     document.getElementById("error-message").innerHTML = "Gagal memuat data pengguna.";
                 }
-            }
 
+
+            }
             // Event listener untuk tombol close modal
-            document.querySelectorAll("[data-modal-hide='edit-user-modal']").forEach((button) => {
+            document.querySelectorAll(".btn-close-edit").forEach((button) => {
                 button.addEventListener("click", function () {
-                    document.getElementById("edit-user-modal").classList.add("hidden");
+                    closeEditModal();
                 });
             });
+            // Fungsi untuk menutup modal dengan animasi
+            function closeEditModal() {
+                // Tambahkan animasi keluar
+                modalContent.classList.add("opacity-0", "scale-95");
+                modalContent.classList.remove("opacity-100", "scale-100");
+
+                // Tunggu animasi selesai sebelum menyembunyikan modal
+                setTimeout(() => {
+                    editModal.classList.add("hidden");
+                }, 300); // Delay sesuai durasi transisi CSS
+            }
+
+
             // Fungsi untuk membuka modal delete (kamu bisa sesuaikan sesuai kebutuhan)
             function openDeleteModal(userId) {
                 const deleteModal = document.getElementById("delete-user-modal");
@@ -471,9 +492,8 @@
 
                 // Tampilkan modal delete
                 deleteModal.classList.remove("hidden");
-                deleteModal.classList.add("flex");
-                deleteModal.classList.add("bg-gray-800");
-                deleteModal.classList.add("bg-opacity-50");
+                deleteModal.classList.add("flex", "h-screen", "bg-gray-800", "bg-opacity-50");
+
 
 
                 // Event listener untuk tombol close modal
