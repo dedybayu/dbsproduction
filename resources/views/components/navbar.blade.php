@@ -3,7 +3,7 @@
     hidden = currentScroll > lastScroll;
     lastScroll = currentScroll;
   })" x-show="!hidden" x-transition:enter="transform transition duration-250 ease-in-out" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" 
-      x-transition:leave="transform transition duration-250 ease-in-out" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" class="bg-gray-800 fixed top-0 left-0 w-full transition-transform duration-300 z-50">
+      x-transition:leave="transform transition duration-250 ease-in-out" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" class="bg-indigo-800 fixed top-0 left-0 w-full transition-transform duration-300 z-50">
 
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
@@ -15,7 +15,7 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                <x-nav-link href="/posts" :active="request()->is('posts')">Blog</x-nav-link>
+                <x-nav-link href="/posts" :active="request()->is('posts')">Articles</x-nav-link>
                 <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
             </div>
@@ -25,7 +25,7 @@
 
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+            <button type="button" class="relative rounded-full bg-indigo-900 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">View notifications</span>
               <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -36,7 +36,7 @@
             <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
-                <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                <button type="button" @click="isOpen = !isOpen" class="relative flex max-w-xs items-center rounded-full text-sm focus:ring-2 focus:ring-indigo-100 focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden ring-2 ring-indigo-400" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="absolute -inset-1.5"></span>
                   <span class="sr-only">Open user menu</span>
                   <img class="size-10 rounded-full" src="/../img/user.png" alt="">
@@ -72,7 +72,7 @@
         </div>
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
-          <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+          <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-indigo-900 p-2 text-gray-400 hover:bg-indigo-700 hover:text-white focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
             <span class="absolute -inset-0.5"></span>
             <span class="sr-only">Open main menu</span>
             <!-- Menu open: "hidden", Menu closed: "block" -->
@@ -100,7 +100,7 @@
       </div>
 
       
-      <div class="border-t border-gray-700 pt-4 pb-3">
+      <div class="border-t border-indigo-700 pt-4 pb-3">
         {{-- <div class="flex items-center px-5">
           @auth
           <div class="shrink-0">
@@ -122,14 +122,14 @@
         </div> --}}
 
         <div class="mt-0 space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
+          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-indigo-700 hover:text-white">Settings</a>
           @auth
             <form action="/logout" method="post">
               @csrf
-              <button type="submit" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Log Out</button>
+              <button type="submit" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-indigo-700 hover:text-white">Log Out</button>
             </form>
           @else
-          <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Login</a>
+          <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-indigo-700 hover:text-white">Login</a>
           @endauth
         </div>
       </div>

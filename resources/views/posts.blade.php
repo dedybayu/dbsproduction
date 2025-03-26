@@ -37,6 +37,15 @@
 
         <span class="text-sm">{{$post->created_at->diffForHumans()}}</span>
       </div>
+
+      <a href="/posts/{{$post['slug']}}">
+        <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 12px;">
+            <img src="{{ $post->image ? asset('storage/' . $post->image) : asset('/../img/logo2.png') }}" alt="Post Image"
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+      </a>
+
+
       <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><a
         href="/posts/{{$post['slug']}}">{{$post['title']}}</a></h2>
       <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{Str::limit($post['body'], 100)}}</p>

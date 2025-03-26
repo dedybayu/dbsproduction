@@ -26,7 +26,7 @@
                         <input type="file" id="profile_picture" name="profile_picture" class="hidden" accept="image/*"
                             onchange="previewImage(event)">
                         <button type="button" onclick="document.getElementById('profile_picture').click()"
-                            class="py-3.5 px-7 text-base font-medium text-indigo-100 bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900">
+                            class="py-3.5 px-7 text-base font-medium text-indigo-100 bg-blue-500 rounded-lg border border-indigo-200 hover:bg-indigo-900">
                             Change picture
                         </button>
                         <button type="button" onclick="removeImage()"
@@ -41,6 +41,13 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                             name</label>
                         <input type="text" id="name" name="name" value="{{ auth()->user()->name }}"
+                            class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                            required>
+                    </div>
+                    <div class="mb-2 sm:mb-6">
+                        <label for="occupancy" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
+                            Occupancy</label>
+                        <input type="text" id="occupancy" name="occupancy" value="{{ auth()->user()->occupancy }}"
                             class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                             required>
                     </div>
@@ -67,7 +74,7 @@
                             Cancel
                         </a>
                         <button type="submit"
-                            class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
                             Save
                         </button>
                     </div>

@@ -29,13 +29,14 @@ class ProfileController extends Controller
         // if ($request->input('remove_picture') == "1") {
         //     return "HELLO WOLRD";
         // }
-
+        // dd($request);
         $user = auth()->user();
 
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'bio' => 'nullable|string',
+            'occupancy' => 'nullable|string',
             // 'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Pastikan hanya gambar yang diizinkan
         ]);
 
@@ -78,6 +79,7 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->bio = $request->bio;
+        $user->occupancy = $request->occupancy;
         if ($imagePath) {
             $user->image = $imagePath;
         }
@@ -95,7 +97,7 @@ class ProfileController extends Controller
         $user->save();
 
         // return "NULL" . $imagePath;
-        return redirect('/profile')->with('success', 'Profile updated successfully!');
+        return redirect('/profile')->with('success-user', 'Profile updated successfully!');
     }
 
 

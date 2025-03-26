@@ -83,6 +83,7 @@ class AdminUsersController extends Controller
                 'username' => 'required|unique:users,username,' . $user->id,
                 'email' => 'required|email|unique:users,email,' . $user->id,
                 'bio' => 'nullable|string',
+                'password' => 'nullable|string|min:5',
             ]);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -177,19 +178,19 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
 
-        dd($id);
-        // $user = User::find($id);
+        $user = User::find($id);
+        // dd($user);
 
-        // if (!$user) {
-        //     return redirect()->back()->with('error', 'Category not found.');
-        // }
+        if (!$user) {
+            return redirect()->back()->with('error', 'Category not found.');
+        }
 
-        // // Hapus semua post yang memiliki kategori ini
-        // Post::where('user_id', $id)->delete();
+        // Hapus semua post yang memiliki kategori ini
+        Post::where('author_id', $id)->delete();
 
-        // // Hapus kategori setelah post dihapus
-        // $user->delete();
+        // Hapus kategori setelah post dihapus
+        $user->delete();
 
-        // return redirect()->back()->with('success-user', 'Category and its posts deleted successfully.');
+        return redirect()->back()->with('success-user', 'Category and its posts deleted successfully.');
     }
 }

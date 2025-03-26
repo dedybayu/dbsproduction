@@ -20,7 +20,7 @@ class RegisterControler extends Controller
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:255'
         ]);
-
+        $validatedData['bio'] = null;
         $validatedData['remember_token'] = Str::random(10);
         $validatedData['email_verified_at'] = now();
 
