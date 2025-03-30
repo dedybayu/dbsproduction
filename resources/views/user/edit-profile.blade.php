@@ -39,8 +39,15 @@
                 <div class="items-center mt-8 sm:mt-14 text-[#202142]">
                     <div class="mb-2 sm:mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                            name</label>
+                            Name</label>
                         <input type="text" id="name" name="name" value="{{ auth()->user()->name }}"
+                            class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                            required>
+                    </div>
+                    <div class="mb-2 sm:mb-6">
+                        <label for="username" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
+                            Username</label>
+                        <input type="text" id="username" name="username" value="{{ auth()->user()->username }}"
                             class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                             required>
                     </div>

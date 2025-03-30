@@ -34,6 +34,7 @@ class ProfileController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|max:20|unique:users,username,' . $user->id . ',id',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'bio' => 'nullable|string',
             'occupancy' => 'nullable|string',
@@ -77,6 +78,7 @@ class ProfileController extends Controller
 
         // Update data lainnya
         $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->bio = $request->bio;
         $user->occupancy = $request->occupancy;

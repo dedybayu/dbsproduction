@@ -114,10 +114,17 @@
         
                             <div class="mb-2 sm:mb-6">
                                 <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your name</label>
+                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your Name</label>
                                 <input type="text" id="first_name"
                                     class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                                     placeholder="Your first name" value="{{auth()->user()->name}}" disabled>
+                            </div>
+                            <div class="mb-2 sm:mb-6">
+                                <label for="username"
+                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your Username</label>
+                                <input type="text" id="username"
+                                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    placeholder="Your Name" value="{{auth()->user()->username}}" disabled>
                             </div>
                             <div class="mb-2 sm:mb-6">
                                 <label for="first_name"
