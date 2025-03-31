@@ -73,39 +73,39 @@ class PostsController extends Controller
         if ($request->hasFile('file-upload')) {
             // return response()->json(['error' => 'No file uploaded'], 400);
             $file = $request->file('file-upload');
-    
+
             if (!$file->isValid()) {
                 return response()->json(['error' => 'Invalid file'], 400);
             }
-        
+
             // Nama file unik
-            $filename = time().'_'.$file->getClientOriginalName();
-        
+            $filename = time() . '_' . $file->getClientOriginalName();
+
             // Pastikan folder penyimpanan ada
             $destinationPath = storage_path('app/public/post-images');
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0775, true);
             }
-        
+
             // Pindahkan file
             $file->move($destinationPath, $filename);
-        
+
             $imagePath = "post-images/$filename"; // Simpan path gambar
         } else {
             $imagePath = null;
         }
-    
+
         // Generate slug awal
         $slug = Str::slug($request->title);
         $originalSlug = $slug; // Simpan slug asli
-    
+
         // Cek apakah slug sudah ada di database
         $count = 1;
         while (Post::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count;
             $count++;
         }
-    
+
         // Simpan data ke database
         Post::create([
             'title' => $request->title,
@@ -115,10 +115,10 @@ class PostsController extends Controller
             'slug' => $slug,
             'image' => $imagePath // Menyimpan path gambar dalam database
         ]);
-    
+
         return redirect('/myposts')->with('success-post', 'Successfully created a post!');
     }
-    
+
 
 
     public function edit($slug)
@@ -144,26 +144,30 @@ class PostsController extends Controller
         if ($request->hasFile('file-upload')) {
             // return response()->json(['error' => 'No file uploaded'], 400);
             $file = $request->file('file-upload');
-    
+
             if (!$file->isValid()) {
                 return response()->json(['error' => 'Invalid file'], 400);
             }
-            
+
             // Nama file unik
-            $filename = time().'_'.$file->getClientOriginalName();
-        
-            // Hapus Gambar Lama
-            Storage::delete($post->image);
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Hapus file lama jika ada
+            $oldImage = $post->image ?? null; // Ambil path file lama dari database
+
+            if ($oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
 
             // Pastikan folder penyimpanan ada
             $destinationPath = storage_path('app/public/post-images');
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0775, true);
             }
-        
+
             // Pindahkan file
             $file->move($destinationPath, $filename);
-        
+
             $imagePath = "post-images/$filename"; // Simpan path gambar
 
         } else {
@@ -204,11 +208,44 @@ class PostsController extends Controller
 
         // Hapus gambar
         if ($data->image) {
-            Storage::delete($data->image);
+            Storage::disk('public')->delete($data->image);
         }
 
         $data->delete();
 
         return redirect('/myposts')->with('success-post', 'Post successfully deleted!');
+    }
+
+    public static function deleteByAuthor($authorId)
+    {
+        // Retrieve all posts by the author
+        $posts = Post::where('author_id', $authorId)->get();
+
+        // Collect all image paths
+        $imagePaths = $posts->pluck('image')->filter()->toArray();
+
+        // Delete all images in a single operation
+        if (!empty($imagePaths)) {
+            Storage::disk('public')->delete($imagePaths);
+        }
+
+        // Delete all posts in a single query
+        Post::where('author_id', $authorId)->delete();
+    }
+    public static function deleteByCategory($categoryId)
+    {
+        // Retrieve all posts by the author
+        $posts = Post::where('category_id', $categoryId)->get();
+
+        // Collect all image paths
+        $imagePaths = $posts->pluck('image')->filter()->toArray();
+
+        // Delete all images in a single operation
+        if (!empty($imagePaths)) {
+            Storage::disk('public')->delete($imagePaths);
+        }
+
+        // Delete all posts in a single query
+        Post::where('author_id', $categoryId)->delete();
     }
 }

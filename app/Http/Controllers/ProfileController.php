@@ -60,11 +60,9 @@ class ProfileController extends Controller
 
             // Hapus file lama jika ada
             $oldImage = $user->image ?? null; // Ambil path file lama dari database
+
             if ($oldImage) {
-                $oldFilePath = storage_path("app/public/$oldImage");
-                if (file_exists($oldFilePath)) {
-                    Storage::delete($user->image);
-                }
+                Storage::disk('public')->delete($oldImage);
             }
 
             // Pindahkan file
@@ -89,9 +87,9 @@ class ProfileController extends Controller
         if ($request->input('remove_picture') == "1") {
             // Hapus gambar lama jika ada
             if ($user->image) {
-                $oldFilePath = storage_path("app/public/" . $user->image);
-                if (file_exists($oldFilePath)) {
-                    Storage::delete($user->image);
+                $oldImage = $user->image; // Ambil path file lama dari database
+                if ($oldImage) {
+                    Storage::disk('public')->delete($oldImage);
                 }
             }
             $user->image = null; // Set kolom di database jadi null

@@ -186,11 +186,15 @@ class AdminUsersController extends Controller
         }
 
         // Hapus semua post yang memiliki kategori ini
-        Post::where('author_id', $id)->delete();
+        $post = Post::where('author_id', $id);
+
+        if ($post){
+            PostsController::deleteByAuthor($id);
+        }
 
         // Hapus kategori setelah post dihapus
         $user->delete();
 
-        return redirect()->back()->with('success-user', 'Category and its posts deleted successfully.');
+        return redirect()->back()->with('success-user', 'User and its posts deleted successfully.');
     }
 }

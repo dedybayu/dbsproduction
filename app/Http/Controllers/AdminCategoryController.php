@@ -24,13 +24,13 @@ class AdminCategoryController extends Controller
 
         $categories = Category::paginate(10); // Menampilkan 10 kategori per halaman
         return view('user.admin.category', compact('categories'), ['title' => 'Category']);
-    //     $categories = Category::paginate(5); // Sesuaikan jumlah per halaman
+        //     $categories = Category::paginate(5); // Sesuaikan jumlah per halaman
 
-    //     if ($request->ajax()) {
-    //         return view('user.admin.category.partials.category_table', compact('categories'))->render();
-    //     }
-    
-    //     return view('user.admin.category.category', compact('categories'));
+        //     if ($request->ajax()) {
+        //         return view('user.admin.category.partials.category_table', compact('categories'))->render();
+        //     }
+
+        //     return view('user.admin.category.category', compact('categories'));
     }
 
     /**
@@ -113,6 +113,7 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
+        // return "Hapus";
         $category = Category::find($id);
 
         if (!$category) {
@@ -120,7 +121,11 @@ class AdminCategoryController extends Controller
         }
 
         // Hapus semua post yang memiliki kategori ini
-        Post::where('category_id', $id)->delete();
+        $post = Post::where('category_id', $id);
+        // dd($post);
+        if ($post) {
+            PostsController::deleteByCategory($id);
+        }
 
         // Hapus kategori setelah post dihapus
         $category->delete();
