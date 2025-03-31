@@ -82,7 +82,8 @@ class AdminUsersController extends Controller
                 'name' => 'required|string|max:100',
                 'username' => 'required|unique:users,username,' . $user->id,
                 'email' => 'required|email|unique:users,email,' . $user->id,
-                'bio' => 'nullable|string',
+                'occupancy' => 'nullable|string|max:100',
+                'bio' => 'nullable|string|max:255',
                 'password' => 'nullable|string|min:5',
             ]);
 
@@ -140,7 +141,9 @@ class AdminUsersController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->occupancy = $request->occupancy;
         $user->bio = $request->bio;
+
         if ($imagePath) {
             $user->image = $imagePath;
         }

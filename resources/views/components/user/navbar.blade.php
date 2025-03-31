@@ -46,7 +46,7 @@
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                                 {{auth()->user()->email}}
                             </p>
-                            <div class="bg-blue-500 bg-opacity-30 text-indigo-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            <div class="bg-blue-500 bg-opacity-30 text-primary-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                                 <p>{{auth()->user()->occupancy}}</p>
                             </div>
                         </div>
