@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterControler;
@@ -46,6 +47,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/register', [RegisterControler::class, 'index'])->middleware('guest');
+Route::get('/mitra', [MitraController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterControler::class, 'store']);
 
 
